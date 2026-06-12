@@ -1,0 +1,240 @@
+/* =========================================
+   MahScript v22.0 - Temas Dinâmicos & UI Profissional
+   ========================================= */
+
+/* TEMA PADRÃO (Royal) */
+:root {
+  --ms-bg: #ffffff; --ms-panel-bg: #ffffff; --ms-text: #1a1a1a; --ms-text-muted: #666666;
+  --ms-border: #e0e0e0; --ms-hover: #f0f4ff; --ms-accent: #4a00e0; --ms-accent-hover: #3700b3;
+  --ms-accent-text: #ffffff; --ms-shadow: rgba(74, 0, 224, 0.15);
+  --gd-workspace-bg: #f8f9fa; --gd-page-bg: #ffffff; --gd-page-text: #000000;
+  --gd-menubar-bg: #ffffff; --gd-menubar-text: #333333; --gd-toolbar-bg: #edf2fa;
+  --gd-toolbar-border: #dadce0; --gd-toolbar-icon: #444746; --gd-toolbar-hover: #d3e3fd;
+  --gd-sidebar-bg: #ffffff; --gd-ruler-bg: #f1f3f4; --gd-ruler-text: #5f6368;
+}
+
+/* AURORA */
+body.mahscript-theme-aurora {
+  --ms-bg: #fff5f7; --ms-panel-bg: #ffe4ec; --ms-text: #2d1b2e; --ms-text-muted: #8b6f8c;
+  --ms-border: #f8c8dc; --ms-hover: #ffd6e7; --ms-accent: #ff6b9d; --ms-accent-hover: #ff527d;
+  --ms-accent-text: #ffffff; --ms-shadow: rgba(255, 107, 157, 0.2);
+  --gd-workspace-bg: #ffe4ec; --gd-page-bg: #fff5f7; --gd-page-text: #2d1b2e;
+  --gd-menubar-bg: #ffe4ec; --gd-menubar-text: #2d1b2e; --gd-toolbar-bg: #ffd6e7;
+  --gd-toolbar-border: #f8c8dc; --gd-toolbar-icon: #8b4568; --gd-toolbar-hover: #ffb3c6;
+  --gd-sidebar-bg: #ffe4ec; --gd-ruler-bg: #ffd6e7; --gd-ruler-text: #8b6f8c;
+}
+
+/* OCEANO */
+body.mahscript-theme-oceano {
+  --ms-bg: #f0f9ff; --ms-panel-bg: #e0f2fe; --ms-text: #1b2d3d; --ms-text-muted: #5f7f9f;
+  --ms-border: #bae6fd; --ms-hover: #cff4ff; --ms-accent: #0284c7; --ms-accent-hover: #0369a1;
+  --ms-accent-text: #ffffff; --ms-shadow: rgba(2, 132, 199, 0.2);
+  --gd-workspace-bg: #e0f2fe; --gd-page-bg: #f0f9ff; --gd-page-text: #1b2d3d;
+  --gd-menubar-bg: #e0f2fe; --gd-menubar-text: #1b2d3d; --gd-toolbar-bg: #cff4ff;
+  --gd-toolbar-border: #bae6fd; --gd-toolbar-icon: #4f6f7f; --gd-toolbar-hover: #bae6fd;
+  --gd-sidebar-bg: #e0f2fe; --gd-ruler-bg: #cff4ff; --gd-ruler-text: #5f7f9f;
+}
+
+/* MEIA-NOITE */
+body.mahscript-theme-meianoite {
+  --ms-bg: #1e1e2e; --ms-panel-bg: #252537; --ms-text: #cdd6f4; --ms-text-muted: #a6adc8;
+  --ms-border: #313244; --ms-hover: #313244; --ms-accent: #89b4fa; --ms-accent-hover: #74c7ec;
+  --ms-accent-text: #1e1e2e; --ms-shadow: rgba(137, 180, 250, 0.2);
+  --gd-workspace-bg: #11111b; --gd-page-bg: #1e1e2e; --gd-page-text: #cdd6f4;
+  --gd-menubar-bg: #181825; --gd-menubar-text: #cdd6f4; --gd-toolbar-bg: #1e1e2e;
+  --gd-toolbar-border: #313244; --gd-toolbar-icon: #cdd6f4; --gd-toolbar-hover: #313244;
+  --gd-sidebar-bg: #181825; --gd-ruler-bg: #1e1e2e; --gd-ruler-text: #a6adc8;
+}
+
+/* ============================================
+   ESTILOS BASE DO GOOGLE DOCS
+   ============================================ */
+body { background-color: var(--gd-workspace-bg) !important; transition: background-color 0.4s ease; }
+
+/* Barra Superior e Menus */
+.docs-titlebar-container, .docs-titlebar, .docs-banner, 
+.docs-menubar, .docs-titlebox, .docs-title-input,
+.docs-mode-selector, .docs-mode-selector *, 
+.docs-titlebar-buttons, .docs-titlebar-buttons * {
+  background-color: var(--gd-menubar-bg) !important; 
+  color: var(--gd-menubar-text) !important;
+  border-color: var(--gd-toolbar-border) !important;
+}
+
+/* Toolbar de Ferramentas */
+.goog-toolbar, .docs-toolbar-container, .docs-toolbar-wrapper,
+.goog-toolbar-button, .docs-toolbar-button, .goog-toolbar-button-content {
+  background-color: var(--gd-toolbar-bg) !important;
+  color: var(--gd-toolbar-icon) !important;
+  border: none !important; box-shadow: none !important;
+}
+
+.goog-toolbar-button:hover, .docs-toolbar-button:hover {
+  background-color: var(--gd-toolbar-hover) !important; border-radius: 4px;
+}
+
+.goog-toolbar-button svg, .docs-toolbar-button svg,
+.goog-toolbar-button img, .docs-toolbar-button img {
+  fill: currentColor !important; stroke: currentColor !important; filter: none !important;
+}
+
+/* Sidebar Nativa e Régua */
+.docs-sidebar, .docs-sidebar-container, .kix-sidebar, .kix-sidebar-container,
+.kix-ruler-container, .docs-ruler {
+  background-color: var(--gd-sidebar-bg) !important; 
+  color: var(--gd-menubar-text) !important;
+  border-color: var(--gd-toolbar-border) !important;
+}
+
+.docs-sidebar *, .kix-sidebar * { color: var(--gd-menubar-text) !important; }
+.docs-sidebar svg, .kix-sidebar svg { fill: var(--gd-menubar-text) !important; stroke: var(--gd-menubar-text) !important; }
+
+/* Área da Folha */
+.kix-page-paginated, .kix-appview-editor, .kix-page-column-container {
+  background-color: var(--gd-page-bg) !important; color: var(--gd-page-text) !important;
+}
+.kix-paragraphrenderer, .kix-linechunk-text { color: var(--gd-page-text) !important; }
+.kix-cursor { border-left-color: var(--ms-accent) !important; }
+::selection { background-color: var(--ms-accent) !important; color: var(--ms-accent-text) !important; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--gd-workspace-bg); }
+::-webkit-scrollbar-thumb { background: var(--ms-accent); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ms-accent-hover); }
+
+/* ============================================
+   UI DO MAHSCRIPT
+   ============================================ */
+#mahscript-fab {
+  position: fixed; bottom: 30px; right: 30px; width: 56px; height: 56px;
+  background: var(--ms-accent); border-radius: 50%;
+  box-shadow: 0 4px 15px var(--ms-shadow);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 10000; transition: all 0.2s ease; color: var(--ms-accent-text);
+}
+#mahscript-fab:hover { transform: translateY(-2px) scale(1.05); background: var(--ms-accent-hover); }
+#mahscript-fab svg { width: 28px; height: 28px; fill: currentColor; stroke: none; }
+
+#mahscript-menu {
+  position: fixed; bottom: 100px; right: 30px; background: var(--ms-panel-bg);
+  border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  padding: 6px 0; display: none; flex-direction: column; z-index: 10000;
+  min-width: 200px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  border: 1px solid var(--ms-border);
+}
+#mahscript-menu button {
+  background: none; border: none; padding: 12px 18px; text-align: left; cursor: pointer;
+  font-size: 14px; color: var(--ms-text); display: flex; align-items: center; gap: 12px;
+  transition: background 0.15s, color 0.15s; font-weight: 500;
+}
+#mahscript-menu button svg { width: 18px; height: 18px; fill: var(--ms-text-muted); stroke: none; }
+#mahscript-menu button:hover { background-color: var(--ms-hover); color: var(--ms-accent); }
+#mahscript-menu button:hover svg { fill: var(--ms-accent); }
+
+/* Painel de Temas (Círculos Puros) */
+#mahscript-theme-panel {
+  position: fixed; bottom: 100px; right: 30px; background: var(--ms-panel-bg);
+  border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  padding: 16px; display: none; z-index: 10000;
+  border: 1px solid var(--ms-border); width: 140px;
+}
+#mahscript-theme-panel.open { display: block; }
+.mahscript-theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; justify-items: center; }
+.mahscript-theme-btn {
+  width: 48px; height: 48px; border-radius: 50%; border: 3px solid transparent;
+  cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.mahscript-theme-btn:hover { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.mahscript-theme-btn.active { 
+  border-color: var(--ms-text); transform: scale(1.1);
+  box-shadow: 0 0 0 2px var(--ms-panel-bg), 0 0 0 4px var(--ms-text);
+}
+
+/* Sidebar Esquerda do MahScript */
+#mahscript-sidebar-left {
+  position: fixed; top: 60px; left: 0; width: 280px; height: calc(100vh - 60px);
+  background-color: var(--ms-panel-bg); border-right: 1px solid var(--ms-border);
+  z-index: 9998; display: flex; flex-direction: column;
+  transition: transform 0.3s ease, background-color 0.4s ease;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+#mahscript-sidebar-left.hidden { transform: translateX(-100%); }
+
+.ms-sidebar-header {
+  padding: 16px 20px; font-weight: 700; font-size: 14px; color: var(--ms-text);
+  border-bottom: 1px solid var(--ms-border); display: flex;
+  justify-content: space-between; align-items: center;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.ms-sidebar-list { flex: 1; overflow-y: auto; padding: 8px 0; }
+
+.ms-chapter-item {
+  padding: 12px 20px; margin: 2px 8px; border-radius: 8px; font-size: 13px;
+  color: var(--ms-text); cursor: pointer; display: flex; align-items: center;
+  gap: 10px; transition: all 0.2s; border: 1px solid transparent;
+}
+.ms-chapter-item:hover { background-color: var(--ms-hover); color: var(--ms-accent); }
+.ms-chapter-item.active { background-color: var(--ms-accent); color: var(--ms-accent-text); font-weight: 600; }
+.ms-chapter-icon { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+#ms-new-chapter-btn {
+  margin: 12px 16px; padding: 10px; background: var(--ms-accent); color: var(--ms-accent-text);
+  border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; gap: 6px; transition: background 0.2s;
+}
+#ms-new-chapter-btn:hover { background: var(--ms-accent-hover); }
+
+/* Modal */
+#mahscript-modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); z-index: 10002; display: none;
+  align-items: center; justify-content: center; backdrop-filter: blur(3px);
+}
+#mahscript-modal {
+  background: var(--ms-panel-bg); border-radius: 10px; width: 400px; max-width: 90vw;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3); border: 1px solid var(--ms-border); overflow: hidden;
+}
+#mahscript-modal-header {
+  padding: 16px 20px; border-bottom: 1px solid var(--ms-border);
+  font-weight: 600; font-size: 14px; color: var(--ms-text);
+}
+#mahscript-modal-body { padding: 20px; }
+.mahscript-input-group { margin-bottom: 16px; }
+.mahscript-input-group label {
+  display: block; font-size: 11px; font-weight: 600; color: var(--ms-text-muted);
+  margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.mahscript-input, .mahscript-textarea {
+  width: 100%; padding: 10px 12px; background: var(--ms-bg); border: 1px solid var(--ms-border);
+  border-radius: 6px; font-size: 14px; color: var(--ms-text); font-family: inherit;
+  box-sizing: border-box; outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+}
+.mahscript-textarea { min-height: 80px; resize: vertical; }
+.mahscript-input:focus, .mahscript-textarea:focus { border-color: var(--ms-accent); box-shadow: 0 0 0 3px var(--ms-shadow); }
+
+#mahscript-modal-footer {
+  padding: 16px 20px; border-top: 1px solid var(--ms-border);
+  display: flex; justify-content: flex-end; gap: 8px;
+}
+.mahscript-btn {
+  padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; border: 1px solid transparent;
+}
+.mahscript-btn-secondary { background: var(--ms-bg); color: var(--ms-text); border-color: var(--ms-border); }
+.mahscript-btn-secondary:hover { background: var(--ms-hover); border-color: var(--ms-text-muted); }
+.mahscript-btn-primary { background: var(--ms-accent); color: var(--ms-accent-text); }
+.mahscript-btn-primary:hover { background: var(--ms-accent-hover); }
+
+/* Selection Toolbar */
+#mahscript-selection-toolbar {
+  position: absolute; display: none; background-color: var(--ms-accent);
+  color: var(--ms-accent-text); padding: 4px 6px; border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 9999; font-family: inherit;
+  font-size: 12px; gap: 2px; align-items: center;
+}
+#mahscript-selection-toolbar button {
+  background: none; border: none; color: var(--ms-accent-text); cursor: pointer;
+  padding: 6px 8px; border-radius: 4px; font-weight: 700; transition: background 0.15s;
+}
+#mahscript-selection-toolbar button:hover { background-color: rgba(255,255,255,0.2); }

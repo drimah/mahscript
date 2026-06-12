@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "MahScript",
+  "version": "22.0",
+  "description": "Editor profissional com temas dinâmicos, toolbar harmonizada e gerenciamento nativo de capítulos.",
+  "permissions": ["activeTab", "scripting", "clipboardWrite", "storage"],
+  "host_permissions": ["*://docs.google.com/document/*"],
+  "content_scripts": [
+    {
+      "matches": ["*://docs.google.com/document/*"],
+      "js": ["content.js"],
+      "css": ["style.css"]
+    }
+  ],
+  "action": {"default_title": "MahScript"}
+}
