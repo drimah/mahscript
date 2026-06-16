@@ -1,16 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "MahScript",
-  "version": "22.0",
-  "description": "Editor profissional com temas dinâmicos, toolbar harmonizada e gerenciamento nativo de capítulos.",
-  "permissions": ["activeTab", "scripting", "clipboardWrite", "storage"],
-  "host_permissions": ["*://docs.google.com/document/*"],
+  "name": "mahscript",
+  "version": "1.0",
+  "description": "Skins e recursos visuais para Google Docs",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "mahscript"
+  },
   "content_scripts": [
     {
-      "matches": ["*://docs.google.com/document/*"],
-      "js": ["content.js"],
-      "css": ["style.css"]
+      "matches": ["*://docs.google.com/*"],
+      "js": ["content.js"]
     }
-  ],
-  "action": {"default_title": "MahScript"}
+  ]
 }

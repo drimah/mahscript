@@ -1,311 +1,502 @@
-const icons = {
-  book: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>`,
-  scroll: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h12a2 2 0 0 0 2-2v-2H4v2a2 2 0 0 0 2 2Z"/><path d="M19 17V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v10"/><path d="M19 17c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2"/><path d="M5 5c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`,
-  palette: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>`,
-  plus: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
-  toggleLeft: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>`
+console.log("mahscript carregado.");
+
+const mahThemes = {
+  black: { main:"#000000", border:"#333333", pageArea:"#f5f5f5", inputBorder:"#dadce0", rulerRotate:"180deg", shareBg:"#f3f4f6", shareText:"#111827" },
+  darkgray: { main:"#2f3136", border:"#44474d", pageArea:"#d9d9d9", inputBorder:"#bdbdbd", rulerRotate:"0deg", shareBg:"#e0e0e0", shareText:"#2f3136" },
+  midnight: { main:"#0f172a", border:"#1e293b", pageArea:"#dbeafe", inputBorder:"#bfdbfe", rulerRotate:"200deg", shareBg:"#dbeafe", shareText:"#0f172a" },
+  forest: { main:"#14532d", border:"#166534", pageArea:"#dcfce7", inputBorder:"#bbf7d0", rulerRotate:"120deg", shareBg:"#dcfce7", shareText:"#14532d" },
+  purple: { main:"#4c1d95", border:"#5b21b6", pageArea:"#f3e8ff", inputBorder:"#e9d5ff", rulerRotate:"270deg", shareBg:"#ede9fe", shareText:"#4c1d95" },
+  coffee: { main:"#5d4037", border:"#6d4c41", pageArea:"#fef7ed", inputBorder:"#fed7aa", rulerRotate:"30deg", shareBg:"#fed7aa", shareText:"#3e2723" },
+  silver: { main:"#616161", border:"#757575", pageArea:"#f3f4f6", inputBorder:"#d1d5db", rulerRotate:"0deg", shareBg:"#e5e7eb", shareText:"#263238" }
 };
 
-// CONFIGURAÇÃO DE TEMAS
-const themeClasses = ['mahscript-theme-aurora', 'mahscript-theme-oceano', 'mahscript-theme-meianoite'];
-const themeNames = ['Padrão (Royal)', 'Aurora', 'Oceano', 'Meia-Noite'];
-const themeColors = ['#4a00e0', '#ff6b9d', '#0284c7', '#89b4fa'];
+const mahSkinNames = {
+  black: "Total Black",
+  darkgray: "Dark Gray",
+  midnight: "Midnight Blue",
+  forest: "Forest Dark",
+  purple: "Royal Purple",
+  coffee: "Coffee Brown",
+  silver: "Metal Silver"
+};
 
-let currentThemeIndex = 0;
-try {
-  const savedTheme = localStorage.getItem('mahscript-theme');
-  if (savedTheme !== null) {
-    currentThemeIndex = parseInt(savedTheme, 10);
-    if (isNaN(currentThemeIndex) || currentThemeIndex < 0 || currentThemeIndex >= themeNames.length) currentThemeIndex = 0;
-  }
-} catch (e) {}
+// Mapeamento das cores para cada skin (para os botões do menu)
+const mahSkinColors = {
+  black: "#0d0d0d",
+  darkgray: "#2f3136",
+  midnight: "#0f172a",
+  forest: "#14532d",
+  purple: "#4c1d95",
+  coffee: "#3e2723",
+  silver: "#263238"
+};
 
-function applyTheme() {
-  themeClasses.forEach(cls => document.body.classList.remove(cls));
-  if (currentThemeIndex > 0) document.body.classList.add(themeClasses[currentThemeIndex - 1]);
-  try { localStorage.setItem('mahscript-theme', currentThemeIndex); } catch (e) {}
-  
-  // Força re-aplicação imediata via JS para vencer overrides do Google
-  forceStyleOverride();
-}
-applyTheme();
-
-// OBSERVADOR DE MUTAÇÃO PARA FORÇAR CORES DINAMICAMENTE
-function forceStyleOverride() {
-  const style = getComputedStyle(document.body);
-  const menubarBg = style.getPropertyValue('--gd-menubar-bg').trim();
-  const toolbarBg = style.getPropertyValue('--gd-toolbar-bg').trim();
-  const sidebarBg = style.getPropertyValue('--gd-sidebar-bg').trim();
-  const menubarText = style.getPropertyValue('--gd-menubar-text').trim();
-  const toolbarIcon = style.getPropertyValue('--gd-toolbar-icon').trim();
-
-  // Aplica em elementos críticos que o Google costuma resetar
-  document.querySelectorAll('.docs-titlebar-container, .docs-menubar, .docs-mode-selector, .docs-mode-selector *').forEach(el => {
-    el.style.backgroundColor = menubarBg;
-    el.style.color = menubarText;
-  });
-
-  document.querySelectorAll('.goog-toolbar, .docs-toolbar-container, .goog-toolbar-button').forEach(el => {
-    el.style.backgroundColor = toolbarBg;
-    if(el.classList.contains('goog-toolbar-button')) el.style.color = toolbarIcon;
-  });
-
-  document.querySelectorAll('.docs-sidebar, .docs-sidebar-container, .kix-sidebar').forEach(el => {
-    el.style.backgroundColor = sidebarBg;
-    el.style.color = menubarText;
-  });
+function makeMahSkin(t) {
+  return `
+html, body, #docs-chrome, #docs-editor, .docs-gm, .docs-shell,
+.docs-chrome-top, .docs-chrome-bottom, .docs-header-container,
+.docs-titlebar, .docs-titlebar-buttons, .docs-titlebar-center,
+.docs-titlebar-right, .docs-title-outer, .docs-menubar,
+.docs-toolbar-wrapper, .goog-toolbar, [class*="toolbar"], #gb {
+  background-color: ${t.main} !important;
 }
 
-// Observa mudanças no DOM para reaplicar estilos quando o Google os sobrescreve
-const observer = new MutationObserver(() => {
-  forceStyleOverride();
-});
-observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
+.docs-titlebar, .docs-toolbar-wrapper, .docs-header-container, .docs-chrome-top {
+  border-bottom: 1px solid ${t.border} !important;
+}
 
-// --- CRIAÇÃO DA UI ---
-const fab = document.createElement('div');
-fab.id = 'mahscript-fab';
-fab.innerHTML = icons.book;
-fab.title = "MahScript";
-document.body.appendChild(fab);
+.kix-appview-editor, .kix-page-content-wrapper {
+  background-color: ${t.pageArea} !important;
+}
 
-const menu = document.createElement('div');
-menu.id = 'mahscript-menu';
-menu.innerHTML = `<button id="btn-appearance">${icons.palette} Aparência</button><button id="btn-chapters">${icons.scroll} Capítulos</button>`;
-document.body.appendChild(menu);
+/* textos gerais e ícones continuam brancos */
+.docs-menubar *, 
+.docs-toolbar-wrapper *, 
+.goog-toolbar *, 
+[class*="toolbar"] *, 
+.docs-outline-widget *, 
+#gb * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  font-weight: 500 !important;
+}
 
-const themePanel = document.createElement('div');
-themePanel.id = 'mahscript-theme-panel';
-let themeButtonsHTML = '<div class="mahscript-theme-grid">';
-themeNames.forEach((name, index) => {
-  themeButtonsHTML += `<button class="mahscript-theme-btn" data-index="${index}" style="background: ${themeColors[index]}" title="${name}"></button>`;
-});
-themeButtonsHTML += '</div>';
-themePanel.innerHTML = themeButtonsHTML;
-document.body.appendChild(themePanel);
+svg, svg *, .docs-icon-img, .docs-icon, .goog-toolbar-button svg, button svg,
+[role="button"] svg, .docs-material svg, .material-icons-extended,
+.docs-toolbar-button-icon svg, [class*="icon"] svg, [class*="icon"] img,
+img[src*="icon"], i.material-icons, span.material-symbols {
+  filter: brightness(0) invert(1) !important;
+  fill: #ffffff !important;
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
 
-const sidebar = document.createElement('div');
-sidebar.id = 'mahscript-sidebar-left';
-sidebar.className = 'hidden';
-sidebar.innerHTML = `
-  <div class="ms-sidebar-header">
-    <span>Capítulos</span>
-    <button id="ms-toggle-sidebar" title="Ocultar/Mostrar">${icons.toggleLeft}</button>
-  </div>
-  <div class="ms-sidebar-list" id="ms-chapter-list"></div>
-  <button id="ms-new-chapter-btn">${icons.plus} Novo Capítulo</button>
+/* nome do arquivo */
+.docs-title-input,
+input.docs-title-input {
+  background: transparent !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: 0 !important;
+  filter: none !important;
+  outline: none !important;
+  opacity: 1 !important;
+}
+
+.docs-title-input-label,
+.docs-title-input-label-inner {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* campo Menus sempre branco, sem fundo claro */
+input[placeholder*="Menus"],
+input[aria-label*="Menus"],
+input[placeholder*="Menu"],
+input[aria-label*="Menu"] {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+input[placeholder*="Menus"]::placeholder,
+input[aria-label*="Menus"]::placeholder,
+input[placeholder*="Menu"]::placeholder,
+input[aria-label*="Menu"]::placeholder {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* campos específicos: zoom, estilo, fonte e tamanho */
+.mahscript-toolbar-field {
+  background-color: ${t.shareBg} !important;
+  color: ${t.shareText} !important;
+  -webkit-text-fill-color: ${t.shareText} !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.mahscript-toolbar-field * {
+  color: ${t.shareText} !important;
+  fill: ${t.shareText} !important;
+  stroke: ${t.shareText} !important;
+  filter: none !important;
+}
+
+/* botões gerais */
+.docs-icon-img-container, .docs-icon-img, .docs-icon {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* botão mahscript */
+#mahscript-book-button {
+  width: 36px !important;
+  height: 36px !important;
+  margin: 0 10px 0 8px !important;
+  border: none !important;
+  border-radius: 50% !important;
+  background-color: ${t.shareBg} !important;
+  color: ${t.shareText} !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 18px !important;
+  z-index: 999999 !important;
+}
+
+#mahscript-book-button,
+#mahscript-book-button * {
+  color: ${t.shareText} !important;
+  fill: ${t.shareText} !important;
+  stroke: ${t.shareText} !important;
+  filter: none !important;
+}
+
+/* menu mahscript - versão com botões coloridos */
+#mahscript-skin-menu {
+  position: fixed !important;
+  top: 58px !important;
+  right: 72px !important;
+  background: #ffffff !important;
+  color: #202124 !important;
+  border-radius: 10px !important;
+  padding: 14px 12px !important;
+  z-index: 9999999 !important;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.3) !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+  width: 220px !important;
+}
+
+#mahscript-skin-menu h3 {
+  margin: 0 0 10px 0 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  color: #5f6368 !important;
+  font-weight: 600 !important;
+}
+
+.mahscript-menu-item {
+  width: 100% !important;
+  margin-bottom: 4px !important;
+  padding: 7px 12px !important;
+  border: 1.5px solid transparent !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  text-align: left !important;
+  background: #ffffff !important;
+  color: #202124 !important;
+  transition: all 0.15s ease !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.mahscript-menu-item:hover {
+  transform: translateX(2px) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
+}
+
+.mahscript-menu-item .check {
+  font-size: 12px !important;
+  opacity: 0;
+  transition: opacity 0.2s ease !important;
+}
+
+.mahscript-menu-item.active .check {
+  opacity: 1 !important;
+}
+
+/* Cores dos botões do menu */
+.mahscript-menu-item[data-skin="black"] { background: #0d0d0d !important; color: #ffffff !important; border-color: #0d0d0d !important; }
+.mahscript-menu-item[data-skin="black"]:hover { background: #1a1a1a !important; }
+.mahscript-menu-item[data-skin="black"] .check { color: #ffffff !important; }
+
+.mahscript-menu-item[data-skin="darkgray"] { background: #2f3136 !important; color: #ffffff !important; border-color: #2f3136 !important; }
+.mahscript-menu-item[data-skin="darkgray"]:hover { background: #3d4045 !important; }
+.mahscript-menu-item[data-skin="darkgray"] .check { color: #ffffff !important; }
+
+.mahscript-menu-item[data-skin="midnight"] { background: #0f172a !important; color: #ffffff !important; border-color: #0f172a !important; }
+.mahscript-menu-item[data-skin="midnight"]:hover { background: #1e293b !important; }
+.mahscript-menu-item[data-skin="midnight"] .check { color: #ffffff !important; }
+
+.mahscript-menu-item[data-skin="forest"] { background: #14532d !important; color: #ffffff !important; border-color: #14532d !important; }
+.mahscript-menu-item[data-skin="forest"]:hover { background: #1a6b38 !important; }
+.mahscript-menu-item[data-skin="forest"] .check { color: #ffffff !important; }
+
+.mahscript-menu-item[data-skin="purple"] { background: #4c1d95 !important; color: #ffffff !important; border-color: #4c1d95 !important; }
+.mahscript-menu-item[data-skin="purple"]:hover { background: #5b21b6 !important; }
+.mahscript-menu-item[data-skin="purple"] .check { color: #ffffff !important; }
+
+.mahscript-menu-item[data-skin="coffee"] { background: #3e2723 !important; color: #ffffff !important; border-color: #3e2723 !important; }
+.mahscript-menu-item[data-skin="coffee"]:hover { background: #4e342e !important; }
+.mahscript-menu-item[data-skin="coffee"] .check { color: #ffffff !important; }
+
+.mahscript-menu-item[data-skin="silver"] { background: #263238 !important; color: #ffffff !important; border-color: #263238 !important; }
+.mahscript-menu-item[data-skin="silver"]:hover { background: #37474f !important; }
+.mahscript-menu-item[data-skin="silver"] .check { color: #ffffff !important; }
+
+.mahscript-menu-item[data-skin="default"] { background: #f1f3f4 !important; color: #202124 !important; border-color: #dadce0 !important; }
+.mahscript-menu-item[data-skin="default"]:hover { background: #e8eaed !important; }
+.mahscript-menu-item[data-skin="default"] .check { color: #1a73e8 !important; }
+
+/* Separador no menu */
+.mahscript-menu-separator {
+  height: 1px !important;
+  background: #e8eaed !important;
+  margin: 4px 0 !important;
+}
+
+/* Compartilhar e Edição */
+[aria-label*="Compartilhar"], [aria-label*="Share"], [guidedhelpid*="share"],
+.docs-titlebar-share-client-button, .docs-titlebar-share-client-button-outer,
+[aria-label*="Edição"], [aria-label*="Editing"], [aria-label*="Editar"],
+[aria-label*="modo"], [aria-label*="Mode"], [guidedhelpid*="mode"],
+.docs-editing-mode-button, .docs-mode-switcher, .docs-toolbar-mode-switcher {
+  background-color: ${t.shareBg} !important;
+  color: ${t.shareText} !important;
+  border: none !important;
+  filter: none !important;
+}
+
+[aria-label*="Compartilhar"], [aria-label*="Share"], [guidedhelpid*="share"],
+.docs-titlebar-share-client-button, .docs-titlebar-share-client-button-outer {
+  border-radius: 24px 0 0 24px !important;
+}
+
+[aria-label*="Edição"], [aria-label*="Editing"], [aria-label*="Editar"],
+[aria-label*="modo"], [aria-label*="Mode"], [guidedhelpid*="mode"],
+.docs-editing-mode-button, .docs-mode-switcher, .docs-toolbar-mode-switcher {
+  border-radius: 24px !important;
+}
+
+.docs-titlebar-share-client-button + div,
+.docs-titlebar-share-client-button-outer + div,
+[aria-label*="Compartilhar"] + div,
+[aria-label*="Share"] + div {
+  background-color: ${t.shareBg} !important;
+  color: ${t.shareText} !important;
+  border-radius: 0 24px 24px 0 !important;
+  margin-left: 1px !important;
+}
+
+[aria-label*="Compartilhar"] *, [aria-label*="Share"] *, [guidedhelpid*="share"] *,
+.docs-titlebar-share-client-button *, .docs-titlebar-share-client-button-outer *,
+[aria-label*="Edição"] *, [aria-label*="Editing"] *, [aria-label*="Editar"] *,
+[aria-label*="modo"] *, [aria-label*="Mode"] *, [guidedhelpid*="mode"] *,
+.docs-editing-mode-button *, .docs-mode-switcher *, .docs-toolbar-mode-switcher * {
+  color: ${t.shareText} !important;
+  fill: ${t.shareText} !important;
+  stroke: ${t.shareText} !important;
+  filter: none !important;
+  background: transparent !important;
+}
+
+/* painel lateral de guias */
+.docs-document-tabs,
+.docs-document-tabs-container,
+[aria-label*="Guias no documento"],
+[aria-label*="Document tabs"] {
+  background-color: ${t.main} !important;
+  color: #ffffff !important;
+}
+
+.docs-document-tabs *,
+.docs-document-tabs-container *,
+[aria-label*="Guias no documento"] *,
+[aria-label*="Document tabs"] * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.docs-document-tabs div:not([aria-selected="true"]),
+.docs-document-tabs-container div:not([aria-selected="true"]),
+[aria-label*="Guias no documento"] div:not([aria-selected="true"]),
+[aria-label*="Document tabs"] div:not([aria-selected="true"]) {
+  background-color: transparent !important;
+}
+
+.docs-document-tabs [aria-selected="true"],
+.docs-document-tabs-container [aria-selected="true"],
+[aria-label*="Guia 1"],
+[aria-label*="Tab 1"] {
+  background-color: ${t.shareBg} !important;
+  color: ${t.shareText} !important;
+  border-radius: 24px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.docs-document-tabs [aria-selected="true"] *,
+.docs-document-tabs-container [aria-selected="true"] *,
+[aria-label*="Guia 1"] *,
+[aria-label*="Tab 1"] * {
+  color: ${t.shareText} !important;
+  fill: ${t.shareText} !important;
+  stroke: ${t.shareText} !important;
+}
+
+img[src*="googleusercontent"], .gb_Aa, .gb_Pa, .gbii {
+  filter: none !important;
+  background-color: transparent !important;
+  border-radius: 50% !important;
+}
+
+input[type="text"]:not(.docs-title-input),
+input[type="search"],
+textarea,
+[contenteditable="true"]:not(.kix-page-paginated *) {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid ${t.inputBorder} !important;
+  caret-color: #000000 !important;
+}
+
+.kix-ruler {
+  background-color: ${t.pageArea} !important;
+  filter: invert(1) hue-rotate(${t.rulerRotate});
+}
+
+.kix-page-paginated {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  box-shadow: 0 0 15px rgba(0,0,0,0.15) !important;
+}
+
+.kix-page-paginated * {
+  background: transparent !important;
+  color: inherit !important;
+}
 `;
-document.body.appendChild(sidebar);
-
-const modalOverlay = document.createElement('div');
-modalOverlay.id = 'mahscript-modal-overlay';
-modalOverlay.innerHTML = `
-  <div id="mahscript-modal">
-    <div id="mahscript-modal-header">Novo Capítulo</div>
-    <div id="mahscript-modal-body">
-      <div class="mahscript-input-group">
-        <label for="chapter-title-input">Nome do Capítulo</label>
-        <input type="text" id="chapter-title-input" class="mahscript-input" placeholder="Ex: Capítulo 1: O Início">
-      </div>
-      <div class="mahscript-input-group">
-        <label for="chapter-content-input">Conteúdo inicial (opcional)</label>
-        <textarea id="chapter-content-input" class="mahscript-textarea" placeholder="Digite uma nota ou o primeiro parágrafo..."></textarea>
-      </div>
-    </div>
-    <div id="mahscript-modal-footer">
-      <button class="mahscript-btn mahscript-btn-secondary" id="modal-cancel">Cancelar</button>
-      <button class="mahscript-btn mahscript-btn-primary" id="modal-save">Criar Capítulo</button>
-    </div>
-  </div>
-`;
-document.body.appendChild(modalOverlay);
-
-let currentEditingHeading = null;
-
-// --- EVENTOS ---
-fab.addEventListener('click', (e) => {
-  e.stopPropagation();
-  const isHidden = menu.style.display === 'none' || menu.style.display === '';
-  menu.style.display = isHidden ? 'flex' : 'none';
-  themePanel.classList.remove('open');
-  if (isHidden) {
-    sidebar.classList.add('hidden');
-    closeModal();
-  }
-});
-
-document.addEventListener('click', (e) => {
-  if (!fab.contains(e.target) && !menu.contains(e.target) && !themePanel.contains(e.target) && !sidebar.contains(e.target) && !modalOverlay.contains(e.target)) {
-    menu.style.display = 'none';
-    themePanel.classList.remove('open');
-    closeModal();
-  }
-});
-
-document.getElementById('btn-appearance').addEventListener('click', () => {
-  menu.style.display = 'none';
-  themePanel.classList.toggle('open');
-  updateThemeButtons();
-});
-
-document.getElementById('btn-chapters').addEventListener('click', () => {
-  menu.style.display = 'none';
-  themePanel.classList.remove('open');
-  sidebar.classList.remove('hidden');
-  scanAndRenderChapters();
-});
-
-document.getElementById('ms-toggle-sidebar').addEventListener('click', () => {
-  sidebar.classList.toggle('hidden');
-});
-
-document.querySelectorAll('.mahscript-theme-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    currentThemeIndex = parseInt(btn.dataset.index, 10);
-    applyTheme();
-    updateThemeButtons();
-  });
-});
-
-function updateThemeButtons() {
-  document.querySelectorAll('.mahscript-theme-btn').forEach((btn, index) => {
-    if (index === currentThemeIndex) btn.classList.add('active');
-    else btn.classList.remove('active');
-  });
 }
 
-function openModal(mode, headingElement = null) {
-  currentEditingHeading = headingElement;
-  const header = document.getElementById('mahscript-modal-header');
-  const titleInput = document.getElementById('chapter-title-input');
-  const contentInput = document.getElementById('chapter-content-input');
-  
-  if (mode === 'new') {
-    header.textContent = 'Novo Capítulo';
-    titleInput.value = '';
-    contentInput.value = '';
-    contentInput.parentElement.style.display = 'block';
-  } else if (mode === 'edit' && headingElement) {
-    header.textContent = 'Renomear Capítulo';
-    titleInput.value = headingElement.textContent.trim();
-    contentInput.parentElement.style.display = 'none';
-  }
-  
-  modalOverlay.style.display = 'flex';
-  setTimeout(() => { titleInput.focus(); titleInput.select(); }, 100);
-}
+function markToolbarFields() {
+  document.querySelectorAll(".docs-toolbar-wrapper div, .docs-toolbar-wrapper span, .docs-toolbar-wrapper input").forEach(el => {
+    const txt = (el.innerText || el.value || el.getAttribute("aria-label") || "").trim();
 
-function closeModal() {
-  modalOverlay.style.display = 'none';
-  currentEditingHeading = null;
-  document.getElementById('chapter-content-input').parentElement.style.display = 'block';
-}
+    if (
+      txt === "100%" ||
+      txt.includes("Texto") ||
+      txt.includes("Arial") ||
+      txt === "11" ||
+      txt === "12" ||
+      txt === "13" ||
+      txt === "14" ||
+      txt === "15" ||
+      txt === "16"
+    ) {
+      let target = el;
 
-document.getElementById('modal-cancel').addEventListener('click', closeModal);
-
-document.getElementById('modal-save').addEventListener('click', () => {
-  const newTitle = document.getElementById('chapter-title-input').value.trim();
-  const newContent = document.getElementById('chapter-content-input').value.trim();
-  if (!newTitle) return;
-
-  if (currentEditingHeading) {
-    currentEditingHeading.textContent = newTitle;
-    currentEditingHeading.blur();
-    setTimeout(() => currentEditingHeading.focus(), 50);
-  } else {
-    // CRIAÇÃO NATIVA VIA EXEC COMMAND
-    const editor = document.querySelector('.kix-appview-editor');
-    if (editor) {
-      editor.focus();
-      document.execCommand('selectAll', false, null);
-      document.getSelection().collapseToEnd();
-      
-      document.execCommand('insertParagraph', false, null);
-      document.execCommand('insertParagraph', false, null);
-      
-      // Aplica Heading 1 nativo do Google Docs
-      document.execCommand('formatBlock', false, 'H1');
-      document.execCommand('insertText', false, newTitle);
-      
-      if (newContent) {
-        document.execCommand('insertParagraph', false, null);
-        document.execCommand('formatBlock', false, 'P');
-        document.execCommand('insertText', false, newContent);
+      for (let i = 0; i < 3; i++) {
+        if (target.parentElement && target.parentElement.closest(".docs-toolbar-wrapper")) {
+          const parentText = (target.parentElement.innerText || "").trim();
+          if (parentText.length <= 30) target = target.parentElement;
+        }
       }
+
+      target.classList.add("mahscript-toolbar-field");
     }
-  }
-  
-  closeModal();
-  setTimeout(scanAndRenderChapters, 600);
-});
+  });
+}
 
-document.getElementById('chapter-title-input').addEventListener('keypress', (e) => {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    document.getElementById('modal-save').click();
-  }
-});
+function applyMahSkin(skinName) {
+  document.getElementById("mahscript-style")?.remove();
 
-document.getElementById('ms-new-chapter-btn').addEventListener('click', () => openModal('new'));
+  if (!mahThemes[skinName]) return;
 
-// RENDERIZAÇÃO NA SIDEBAR (FILTRO POR "CAPÍTULO")
-function scanAndRenderChapters() {
-  const listContainer = document.getElementById('ms-chapter-list');
-  if (!listContainer) return;
-  listContainer.innerHTML = '';
-  
-  const allHeadings = document.querySelectorAll('[role="heading"][aria-level="1"], [role="heading"][aria-level="2"]');
-  const validHeadings = Array.from(allHeadings).filter(h => h.textContent.toLowerCase().includes('capítulo'));
-  
-  if (validHeadings.length === 0) {
-    listContainer.innerHTML = '<p style="color: var(--ms-text-muted); font-size: 13px; text-align: center; margin-top: 20px; padding: 0 20px;">Nenhum capítulo encontrado.<br>Crie títulos começando com "Capítulo".</p>';
-    return;
-  }
+  const style = document.createElement("style");
+  style.id = "mahscript-style";
+  style.textContent = makeMahSkin(mahThemes[skinName]);
+  document.documentElement.appendChild(style);
 
-  validHeadings.forEach((heading, index) => {
-    const item = document.createElement('div');
-    item.className = 'ms-chapter-item';
-    const title = heading.textContent.trim();
-    
-    item.innerHTML = `
-      <svg class="ms-chapter-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-      <span class="ms-chapter-title">${title}</span>
-    `;
+  injectMahButton(skinName);
 
-    item.addEventListener('click', () => {
-      document.querySelectorAll('.ms-chapter-item').forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      heading.style.backgroundColor = 'var(--ms-hover)';
-      setTimeout(() => {
-        heading.style.backgroundColor = 'transparent';
-        heading.style.transition = 'background-color 1s ease';
-      }, 800);
+  setTimeout(markToolbarFields, 300);
+  setTimeout(markToolbarFields, 1000);
+  setTimeout(markToolbarFields, 2000);
+}
+
+function injectMahButton(currentSkin = "black") {
+  document.getElementById("mahscript-book-button")?.remove();
+
+  const rightArea =
+    document.querySelector(".docs-titlebar-buttons") ||
+    document.querySelector(".docs-titlebar-right") ||
+    document.querySelector("#gb");
+
+  if (!rightArea) return;
+
+  const btn = document.createElement("button");
+  btn.id = "mahscript-book-button";
+  btn.type = "button";
+  btn.title = "mahscript ativo";
+  btn.innerHTML = "📖";
+
+  rightArea.insertBefore(btn, rightArea.firstChild);
+
+  btn.addEventListener("click", () => {
+    const oldMenu = document.getElementById("mahscript-skin-menu");
+    if (oldMenu) {
+      oldMenu.remove();
+      return;
+    }
+
+    const menu = document.createElement("div");
+    menu.id = "mahscript-skin-menu";
+    menu.innerHTML = "<h3>Skins</h3>";
+
+    // Botões das skins (com cores)
+    Object.entries(mahSkinNames).forEach(([key, label]) => {
+      const item = document.createElement("button");
+      item.className = "mahscript-menu-item";
+      item.setAttribute("data-skin", key);
+      if (key === currentSkin) item.classList.add("active");
+      item.innerHTML = `${label} <span class="check">✓</span>`;
+      item.onclick = () => {
+        applyMahSkin(key);
+        menu.remove();
+      };
+      menu.appendChild(item);
     });
 
-    listContainer.appendChild(item);
+    // Separador
+    const sep = document.createElement("div");
+    sep.className = "mahscript-menu-separator";
+    menu.appendChild(sep);
+
+    // Botão Default
+    const defaultItem = document.createElement("button");
+    defaultItem.className = "mahscript-menu-item";
+    defaultItem.setAttribute("data-skin", "default");
+    if (currentSkin === "default") defaultItem.classList.add("active");
+    defaultItem.innerHTML = `Default <span class="check">✓</span>`;
+    defaultItem.onclick = () => {
+      applyMahSkin("default");
+      menu.remove();
+    };
+    menu.appendChild(defaultItem);
+
+    document.body.appendChild(menu);
   });
 }
 
-// SELECTION TOOLBAR
-const selectionToolbar = document.createElement('div');
-selectionToolbar.id = 'mahscript-selection-toolbar';
-selectionToolbar.innerHTML = `<button id="sel-bold" title="Negrito">N</button>`;
-document.body.appendChild(selectionToolbar);
+setTimeout(() => applyMahSkin("black"), 1500);
 
-document.addEventListener('mouseup', (e) => {
-  const selection = window.getSelection();
-  if (selection.toString().trim().length > 0 && !menu.contains(e.target) && !themePanel.contains(e.target) && !sidebar.contains(e.target) && !modalOverlay.contains(e.target)) {
-    const rect = selection.getRangeAt(0).getBoundingClientRect();
-    selectionToolbar.style.display = 'flex';
-    selectionToolbar.style.top = `${rect.top + window.scrollY - 40}px`;
-    selectionToolbar.style.left = `${rect.left + (rect.width / 2) - 15}px`;
-  } else {
-    selectionToolbar.style.display = 'none';
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg?.type === "applySkin") {
+    applyMahSkin(msg.skin);
   }
-});
-
-document.getElementById('sel-bold').addEventListener('click', () => {
-  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'b', ctrlKey: true, bubbles: true }));
-  selectionToolbar.style.display = 'none';
 });
