@@ -1,297 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      width: 240px;
-      padding: 16px 14px 14px 14px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background: #ffffff;
-      color: #202124;
-    }
-
-    /* Título */
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #e8eaed;
-    }
-
-    .header h3 {
-      font-size: 12px;
-      font-weight: 600;
-      color: #1a1a1a;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .header span {
-      font-size: 10px;
-      color: #9aa0a6;
-      font-weight: 400;
-    }
-
-    /* Lista de skins */
-    .skin-list {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    /* Cada botão - O PRÓPRIO BOTÃO MOSTRA A COR */
-    .skin-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      border: 1.5px solid transparent;
-      width: 100%;
-      text-align: left;
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 500;
-      color: #ffffff;
-      background: #ffffff;
-      border-color: #e8eaed;
-    }
-
-    .skin-item:hover {
-      transform: translateX(2px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .skin-item:active {
-      transform: scale(0.98);
-    }
-
-    /* CORES DOS BOTÕES - cada botão mostra a cor da skin */
-    .skin-black {
-      background: #0d0d0d;
-      color: #ffffff;
-      border-color: #0d0d0d;
-    }
-    .skin-black:hover { background: #1a1a1a; }
-
-    .skin-darkgray {
-      background: #2f3136;
-      color: #ffffff;
-      border-color: #2f3136;
-    }
-    .skin-darkgray:hover { background: #3d4045; }
-
-    .skin-midnight {
-      background: #0f172a;
-      color: #ffffff;
-      border-color: #0f172a;
-    }
-    .skin-midnight:hover { background: #1e293b; }
-
-    .skin-forest {
-      background: #14532d;
-      color: #ffffff;
-      border-color: #14532d;
-    }
-    .skin-forest:hover { background: #1a6b38; }
-
-    .skin-purple {
-      background: #4c1d95;
-      color: #ffffff;
-      border-color: #4c1d95;
-    }
-    .skin-purple:hover { background: #5b21b6; }
-
-    .skin-coffee {
-      background: #3e2723;
-      color: #ffffff;
-      border-color: #3e2723;
-    }
-    .skin-coffee:hover { background: #4e342e; }
-
-    .skin-silver {
-      background: #263238;
-      color: #ffffff;
-      border-color: #263238;
-    }
-    .skin-silver:hover { background: #37474f; }
-
-    .skin-default {
-      background: #f1f3f4;
-      color: #202124;
-      border-color: #dadce0;
-    }
-    .skin-default:hover { background: #e8eaed; }
-
-    /* Check de selecionado */
-    .skin-check {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,0.3);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-
-    .skin-default .skin-check {
-      border-color: #dadce0;
-    }
-
-    .skin-check.active {
-      background: rgba(255,255,255,0.25);
-      border-color: #ffffff;
-    }
-
-    .skin-check.active::after {
-      content: "✓";
-      color: #ffffff;
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .skin-default .skin-check.active {
-      background: #1a73e8;
-      border-color: #1a73e8;
-    }
-
-    .skin-default .skin-check.active::after {
-      color: #ffffff;
-    }
-
-    /* Separador */
-    .separator {
-      height: 1px;
-      background: #e8eaed;
-      margin: 4px 0;
-    }
-
-    /* Rodapé */
-    .footer {
-      margin-top: 12px;
-      padding-top: 8px;
-      border-top: 1px solid #e8eaed;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .footer small {
-      font-size: 9px;
-      color: #9aa0a6;
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>mahscript</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            padding: 15px; 
+            width: 280px;
+            background: #fff;
+        }
+        h3 { 
+            margin: 0 0 15px 0; 
+            font-size: 16px; 
+            color: #202124;
+            font-weight: 600;
+        }
+        h4 { 
+            margin: 20px 0 8px 0; 
+            font-size: 12px; 
+            color: #5f6368;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        button { 
+            display: block; 
+            width: 100%; 
+            margin-bottom: 6px; 
+            padding: 10px 12px; 
+            cursor: pointer; 
+            border: 1px solid #dadce0; 
+            background: #fff; 
+            border-radius: 6px; 
+            text-align: left;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        button:hover { 
+            background: #f1f3f4;
+            border-color: #80868b;
+        }
+        hr { 
+            border: 0; 
+            border-top: 1px solid #e8eaed; 
+            margin: 15px 0; 
+        }
+        .skin-btn[data-skin="black"] { background: #0d0d0d; color: #fff; border-color: #0d0d0d; }
+        .skin-btn[data-skin="midnight"] { background: #0f172a; color: #fff; border-color: #0f172a; }
+        .skin-btn[data-skin="forest"] { background: #14532d; color: #fff; border-color: #14532d; }
+        .skin-btn[data-skin="purple"] { background: #4c1d95; color: #fff; border-color: #4c1d95; }
+        .skin-btn[data-skin="coffee"] { background: #3e2723; color: #fff; border-color: #3e2723; }
+        .skin-btn[data-skin="silver"] { background: #263238; color: #fff; border-color: #263238; }
+        .skin-btn[data-skin="default"] { background: #f8f9fa; color: #202124; }
+    </style>
 </head>
 <body>
-  <div class="header">
-    <h3>Skins</h3>
-    <span>8</span>
-  </div>
-
-  <div class="skin-list">
-    <button class="skin-item skin-black" id="btn-black" data-skin="black">
-      <span>Total Black</span>
-      <span class="skin-check"></span>
+    <h3>📖 mahscript</h3>
+    
+    <h4>Google Docs</h4>
+    <button class="skin-btn" data-skin="default">Tema Padrão</button>
+    <button class="skin-btn" data-skin="black">Total Black</button>
+    <button class="skin-btn" data-skin="midnight">Midnight Blue</button>
+    <button class="skin-btn" data-skin="forest">Forest Dark</button>
+    <button class="skin-btn" data-skin="purple">Royal Purple</button>
+    <button class="skin-btn" data-skin="coffee">Coffee Brown</button>
+    <button class="skin-btn" data-skin="silver">Metal Silver</button>
+    
+    <hr>
+    
+    <button id="btn-open-editor" style="background: #1a73e8; color: #fff; border-color: #1a73e8; text-align: center; font-weight: 600;">
+        Abrir Editor MahScript
     </button>
 
-    <button class="skin-item skin-darkgray" id="btn-darkgray" data-skin="darkgray">
-      <span>Dark Gray</span>
-      <span class="skin-check"></span>
-    </button>
-
-    <button class="skin-item skin-midnight" id="btn-midnight" data-skin="midnight">
-      <span>Midnight Blue</span>
-      <span class="skin-check"></span>
-    </button>
-
-    <button class="skin-item skin-forest" id="btn-forest" data-skin="forest">
-      <span>Forest Dark</span>
-      <span class="skin-check"></span>
-    </button>
-
-    <button class="skin-item skin-purple" id="btn-purple" data-skin="purple">
-      <span>Royal Purple</span>
-      <span class="skin-check"></span>
-    </button>
-
-    <button class="skin-item skin-coffee" id="btn-coffee" data-skin="coffee">
-      <span>Coffee Brown</span>
-      <span class="skin-check"></span>
-    </button>
-
-    <button class="skin-item skin-silver" id="btn-silver" data-skin="silver">
-      <span>Metal Silver</span>
-      <span class="skin-check"></span>
-    </button>
-
-    <div class="separator"></div>
-
-    <button class="skin-item skin-default" id="btn-default" data-skin="default">
-      <span>Default</span>
-      <span class="skin-check"></span>
-    </button>
-  </div>
-
-  <div class="footer">
-    <small>Google Docs</small>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const skinMap = {
-        'btn-black': 'black',
-        'btn-darkgray': 'darkgray',
-        'btn-midnight': 'midnight',
-        'btn-forest': 'forest',
-        'btn-purple': 'purple',
-        'btn-coffee': 'coffee',
-        'btn-silver': 'silver',
-        'btn-default': 'default'
-      };
-
-      function applySkin(skinName) {
-        chrome.runtime.sendMessage({ action: 'applySkin', skin: skinName });
-        chrome.storage.local.set({ activeSkin: skinName });
-      }
-
-      Object.entries(skinMap).forEach(([id, skin]) => {
-        const btn = document.getElementById(id);
-        if (btn) {
-          btn.addEventListener('click', () => {
-            document.querySelectorAll('.skin-check').forEach(d => d.classList.remove('active'));
-            const check = btn.querySelector('.skin-check');
-            if (check) check.classList.add('active');
-            applySkin(skin);
-          });
-        }
-      });
-
-      chrome.storage.local.get(['activeSkin'], (result) => {
-        const activeSkin = result.activeSkin || 'default';
-        const btnId = Object.keys(skinMap).find(key => skinMap[key] === activeSkin);
-        if (btnId) {
-          const btn = document.getElementById(btnId);
-          if (btn) {
-            const check = btn.querySelector('.skin-check');
-            if (check) check.classList.add('active');
-          }
-        }
-      });
-    });
-  </script>
+    <script src="popup.js"></script>
 </body>
 </html>
