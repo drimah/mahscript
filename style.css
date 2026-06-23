@@ -1,0 +1,101 @@
+/* =========================================
+MahScript v23.0 - Novos Temas & Admin de Capítulos
+========================================= */
+
+/* ... (Mantenha todos os temas anteriores: Royal, Aurora, Oceano, Meia-Noite) ... */
+
+/* NOVOS TEMAS SOLICITADOS */
+/* LAVANDA */
+body.mahscript-theme-lavanda {
+--ms-bg: #f5f3ff; --ms-panel-bg: #ede9fe; --ms-text: #4c1d95; --ms-text-muted: #8b5cf6;
+--ms-border: #ddd6fe; --ms-hover: #e9d5ff; --ms-accent: #7c3aed; --ms-accent-hover: #6d28d9;
+--ms-accent-text: #ffffff; --ms-shadow: rgba(124, 58, 237, 0.2);
+--gd-workspace-bg: #ede9fe; --gd-page-bg: #f5f3ff; --gd-page-text: #4c1d95;
+--gd-menubar-bg: #ede9fe; --gd-menubar-text: #4c1d95; --gd-toolbar-bg: #e9d5ff;
+--gd-toolbar-border: #ddd6fe; --gd-toolbar-icon: #6d28d9; --gd-toolbar-hover: #ddd6fe;
+--gd-sidebar-bg: #ede9fe; --gd-ruler-bg: #e9d5ff; --gd-ruler-text: #8b5cf6;
+}
+
+/* CARMIM */
+body.mahscript-theme-carmim {
+--ms-bg: #fff1f2; --ms-panel-bg: #ffe4e6; --ms-text: #881337; --ms-text-muted: #be123c;
+--ms-border: #fecdd3; --ms-hover: #fecdd3; --ms-accent: #e11d48; --ms-accent-hover: #be123c;
+--ms-accent-text: #ffffff; --ms-shadow: rgba(225, 29, 72, 0.2);
+--gd-workspace-bg: #ffe4e6; --gd-page-bg: #fff1f2; --gd-page-text: #881337;
+--gd-menubar-bg: #ffe4e6; --gd-menubar-text: #881337; --gd-toolbar-bg: #fecdd3;
+--gd-toolbar-border: #fecdd3; --gd-toolbar-icon: #be123c; --gd-toolbar-hover: #fecdd3;
+--gd-sidebar-bg: #ffe4e6; --gd-ruler-bg: #fecdd3; --gd-ruler-text: #be123c;
+}
+
+/* OLIVA */
+body.mahscript-theme-oliva {
+--ms-bg: #f7fee7; --ms-panel-bg: #ecfccb; --ms-text: #365314; --ms-text-muted: #65a30d;
+--ms-border: #d9f99d; --ms-hover: #d9f99d; --ms-accent: #4d7c0f; --ms-accent-hover: #365314;
+--ms-accent-text: #ffffff; --ms-shadow: rgba(77, 124, 15, 0.2);
+--gd-workspace-bg: #ecfccb; --gd-page-bg: #f7fee7; --gd-page-text: #365314;
+--gd-menubar-bg: #ecfccb; --gd-menubar-text: #365314; --gd-toolbar-bg: #d9f99d;
+--gd-toolbar-border: #d9f99d; --gd-toolbar-icon: #65a30d; --gd-toolbar-hover: #d9f99d;
+--gd-sidebar-bg: #ecfccb; --gd-ruler-bg: #d9f99d; --gd-ruler-text: #65a30d;
+}
+
+/* SAFIRA */
+body.mahscript-theme-safira {
+--ms-bg: #eff6ff; --ms-panel-bg: #dbeafe; --ms-text: #1e3a8a; --ms-text-muted: #3b82f6;
+--ms-border: #bfdbfe; --ms-hover: #bfdbfe; --ms-accent: #2563eb; --ms-accent-hover: #1d4ed8;
+--ms-accent-text: #ffffff; --ms-shadow: rgba(37, 99, 235, 0.2);
+--gd-workspace-bg: #dbeafe; --gd-page-bg: #eff6ff; --gd-page-text: #1e3a8a;
+--gd-menubar-bg: #dbeafe; --gd-menubar-text: #1e3a8a; --gd-toolbar-bg: #bfdbfe;
+--gd-toolbar-border: #bfdbfe; --gd-toolbar-icon: #3b82f6; --gd-toolbar-hover: #bfdbfe;
+--gd-sidebar-bg: #dbeafe; --gd-ruler-bg: #bfdbfe; --gd-ruler-text: #3b82f6;
+}
+
+/* CARVÃO */
+body.mahscript-theme-carvao {
+--ms-bg: #27272a; --ms-panel-bg: #3f3f46; --ms-text: #fafafa; --ms-text-muted: #a1a1aa;
+--ms-border: #52525b; --ms-hover: #52525b; --ms-accent: #d4d4d8; --ms-accent-hover: #e4e4e7;
+--ms-accent-text: #18181b; --ms-shadow: rgba(0, 0, 0, 0.4);
+--gd-workspace-bg: #18181b; --gd-page-bg: #27272a; --gd-page-text: #fafafa;
+--gd-menubar-bg: #18181b; --gd-menubar-text: #fafafa; --gd-toolbar-bg: #27272a;
+--gd-toolbar-border: #52525b; --gd-toolbar-icon: #fafafa; --gd-toolbar-hover: #52525b;
+--gd-sidebar-bg: #18181b; --gd-ruler-bg: #27272a; --gd-ruler-text: #a1a1aa;
+}
+
+/* PÊSSEGO */
+body.mahscript-theme-pessego {
+--ms-bg: #fff7ed; --ms-panel-bg: #ffedd5; --ms-text: #7c2d12; --ms-text-muted: #ea580c;
+--ms-border: #fed7aa; --ms-hover: #fed7aa; --ms-accent: #f97316; --ms-accent-hover: #ea580c;
+--ms-accent-text: #ffffff; --ms-shadow: rgba(249, 115, 22, 0.2);
+--gd-workspace-bg: #ffedd5; --gd-page-bg: #fff7ed; --gd-page-text: #7c2d12;
+--gd-menubar-bg: #ffedd5; --gd-menubar-text: #7c2d12; --gd-toolbar-bg: #fed7aa;
+--gd-toolbar-border: #fed7aa; --gd-toolbar-icon: #ea580c; --gd-toolbar-hover: #fed7aa;
+--gd-sidebar-bg: #ffedd5; --gd-ruler-bg: #fed7aa; --gd-ruler-text: #ea580c;
+}
+
+/* ============================================
+ATUALIZAÇÕES DA UI PARA ADMINISTRAÇÃO DE CAPÍTULOS
+============================================ */
+
+.ms-chapter-item {
+padding: 10px 16px; margin: 4px 8px; border-radius: 8px; font-size: 13px;
+color: var(--ms-text); cursor: pointer; display: flex; align-items: center;
+gap: 10px; transition: all 0.2s; border: 1px solid transparent; position: relative;
+}
+
+.ms-chapter-number {
+font-weight: 700; color: var(--ms-accent); min-width: 24px; text-align: center;
+font-size: 12px; background: var(--ms-hover); padding: 2px 4px; border-radius: 4px;
+}
+
+.ms-chapter-actions {
+margin-left: auto; display: none; gap: 4px; opacity: 0.7;
+}
+
+.ms-chapter-item:hover .ms-chapter-actions { display: flex; }
+.ms-chapter-actions button {
+background: none; border: none; cursor: pointer; color: var(--ms-text-muted);
+padding: 2px; border-radius: 4px; display: flex; align-items: center;
+}
+.ms-chapter-actions button:hover { color: var(--ms-accent); background: var(--ms-bg); }
+
+/* Botões de movimento (Setas) */
+.ms-move-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
